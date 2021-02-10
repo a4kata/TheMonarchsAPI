@@ -27,7 +27,7 @@ namespace TheMonarchs.Models
                 else
                     period = 1;
             }
-            catch { }
+            catch { period = 0; }
         }
     }
 
