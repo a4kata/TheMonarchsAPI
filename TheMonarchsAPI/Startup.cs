@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TheMonarchs.Implementation;
+using TheMonarchs.Interfaces;
 
 namespace TheMonarchs
 {
@@ -27,6 +29,8 @@ namespace TheMonarchs
         {
             services.AddControllers();
             services.AddSwaggerGen();
+            string monarchDataFilePath = Configuration.GetValue<string>("MonarchDataFilePath");
+            services.AddSingleton<IGovernmentDataService>(_ => new MonarchService(monarchDataFilePath));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -14,48 +14,33 @@ namespace TheMonarchs.Controllers
     [ApiController]
     public class MonarchsController : Controller
     {
-        private MonarchService _ms;
+        private IGovernmentDataService _gdp;
 
-        public MonarchsController()
+        public MonarchsController(IGovernmentDataService gdp)
         {
-            _ms = new MonarchService();
+            _gdp = gdp;
         }
 
         [Route("GetMonarchs_All")]
         [HttpGet()]
-        public async Task<List<Monarch>> GetMonarchs_AllAsync()
-        {
-            return  (List<Monarch>)await _ms.GetAll<Monarch>();
-        }
+        public async Task<List<Monarch>> GetMonarchs_AllAsync() => (List<Monarch>)await _gdp.GetAll<Monarch>();
 
         [Route("GetMostCommonName")]
         [HttpGet()]
-        public async Task<string> GetMostCommonNameAsync()
-        {
-            return await _ms.GetMostCommonRulerName();
-        }
+        public async Task<string> GetMostCommonNameAsync() => await _gdp.GetMostCommonRulerName();
 
         [Route("GetLongestRuledHouse")]
         [HttpGet()]
-        public async Task<string> GetLongestRuledHouseAsync()
-        {
-            return await _ms.GetLongestRuledHouse();
-        }
+        public async Task<string> GetLongestRuledHouseAsync() => await _gdp.GetLongestRuledHouse();
 
         [Route("GetLongestRuledMonarch")]
         [HttpGet()]
-        public async Task<string> GetLongestRuledMonarchAsync()
-        {
-            return await _ms.GetLongestRuled();
-        }
+        public async Task<string> GetLongestRuledMonarchAsync() => await _gdp.GetLongestRuled();
 
         [Route("GetMonarchsCount")]
         [HttpGet()]
-        public async Task<string> GetMonarchsCountAsync()
-        {
-            return await _ms.GetMonarchsCount();
-        }
-        
+        public async Task<string> GetMonarchsCountAsync() => await _gdp.GetCount();
+
 
     }
 }

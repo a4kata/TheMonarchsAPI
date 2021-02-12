@@ -10,13 +10,13 @@ using TheMonarchsAPI.Utilities;
 
 namespace TheMonarchs.Implementation
 {
-    public class MonarchService : IGovernmentService
+    public class MonarchService : IGovernmentDataService
     {
         public List<Monarch> AllMonarches { get; }
 
-        public MonarchService()
+        public MonarchService(string filePath)
         {
-            var json = File.ReadAllText($"Data/Monarchs.json");
+            var json = File.ReadAllText(filePath);
             AllMonarches = JsonSerializer.Deserialize<List<Monarch>>(json);
             AllMonarches.ForEach(m => Utility.CalcPeriod(m));
         }
@@ -44,14 +44,9 @@ namespace TheMonarchs.Implementation
             return Task.FromResult($"Most common monarch name is {name}");
         }
 
-        public Task<string> GetMonarchsCount()
+        public Task<string> GetCount()
         {
             return Task.FromResult($"The total number of monarchs is {AllMonarches.Count()}");
-        }
-
-        public Task<int> GetCount()
-        {
-            return Task.FromResult(AllMonarches.Count());
         }
 
         private Task<string> GroupByHouses()

@@ -6,9 +6,9 @@ using TheMonarchs.Models;
 
 namespace TheMonarchs.Interfaces
 {
-    public interface IGovernmentService
+    public interface IGovernmentDataService
     {
-        Task<int> GetCount();
+        Task<string> GetCount();
         Task<IList<T>> GetAll<T>();
         Task<string> GetLongestRuled();
         Task<string> GetLongestRuledHouse();
