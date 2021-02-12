@@ -15,20 +15,6 @@ namespace TheMonarchs.Models
         public string yrs { get; set; }
         public int period { get; set; }
 
-        public void CalcPeriod()
-        {
-            try
-            {
-                if (yrs.Contains("-"))
-                {
-                    period = Convert.ToInt32(yrs.Split('-')[0]) - Convert.ToInt32(yrs.Split('-')[1]);
-                    period = period < 0 ? period * -1 : period;
-                }
-                else
-                    period = 1;
-            }
-            catch { period = 0; }
-        }
     }
 
 }

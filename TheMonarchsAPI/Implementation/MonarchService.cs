@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using TheMonarchs.Interfaces;
 using TheMonarchs.Models;
+using TheMonarchsAPI.Utilities;
 
 namespace TheMonarchs.Implementation
 {
@@ -17,7 +18,7 @@ namespace TheMonarchs.Implementation
         {
             var json = File.ReadAllText($"Data/Monarchs.json");
             AllMonarches = JsonSerializer.Deserialize<List<Monarch>>(json);
-            AllMonarches.ForEach(m => m.CalcPeriod());
+            AllMonarches.ForEach(m => Utility.CalcPeriod(m));
         }
 
         public Task<IList<T>> GetAll<T>()
